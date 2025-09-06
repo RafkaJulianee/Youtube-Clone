@@ -1,7 +1,11 @@
-
-.montserrat-<uniquifier> {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
+@font-face {
+  font-family: 'mantap';
+  src: url('font/CossetteTitre-Bold.ttf') format('ttf'),
+       url('font/CossetteTitre-Regular.ttf') format('ttf');
+  font-weight: normal;
   font-style: normal;
+}
+
+body{
+  font-family: 'mantap';
 }
