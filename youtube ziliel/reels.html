@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body{
+            font-family: sans-serif;
+        }
         .video-container {
   height: 400px;          /* tinggi area scroll */
   overflow-y: scroll;     /* aktifin scroll ke bawah */
@@ -17,14 +20,37 @@ video {
   width: 100%;            /* biar responsive */
   border-radius: 10px;
 }
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color:black;
+  font-weight: bold;
+}
 
     </style>
 </head>
 <body>
     <div class="video-container">
-  <video src="movie.mp4" controls></video>
-  <video src="movie.mp4" controls></video>
-  <video src="movie.mp4" controls></video>
+  <video src="video/movie.mp4" controls></video>
+  <video src="video/movie.mp4" controls></video>
+  <video src="video/movie.mp4" controls></video>
+
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="reels.html">Reels</a>
+    <a href="">Akun</a>
+  </div>
 
 
 </body>
