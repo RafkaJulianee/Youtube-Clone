@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .video-container {
+  height: 400px;          /* tinggi area scroll */
+  overflow-y: scroll;     /* aktifin scroll ke bawah */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;              /* jarak antar video */
+}
+
+video {
+  width: 100%;            /* biar responsive */
+  border-radius: 10px;
+}
+
+    </style>
 </head>
 <body>
     <div class="video-container">
