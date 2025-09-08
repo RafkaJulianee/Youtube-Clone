@@ -73,9 +73,12 @@ text-align: center;    /* center vertical */
    <body>
   <div class="owen">
     <h1>Ziliel</h1>
+    <input type="text" id="nama">
     <script>
-      nama = 'Rafka Julian Pratama'
-      document.writeln('<h2>Hallo,'+nama)
+      nama = document.getElementById('nama').value
+      document.writeln(nama)
+
+
         
       
     </script>
