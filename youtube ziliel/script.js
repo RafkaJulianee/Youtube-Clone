@@ -1,0 +1,1 @@
+nama = "Rafka Julian Pratama"
