@@ -1,54 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <style>
-        body{
-             
+        body {
+            font-family: "Montserrat";
         }
-        .header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-     
-      
-            
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+
+
         }
-        .header a{
+
+        .header a {
             margin-right: 450px;
             text-decoration: none;
             color: black;
-             font-family: "Dancing Script";
-            
-        }
-        .story img{
-            width: 15%;
-            border-radius: 120px;
-            margin-top: 30px;
-                  display: flex;
-      justify-content: space-between;
-        }
-       
+            font-family: "Dancing Script";
 
+        }
+
+        .story {
+            display: flex;
+            justify-content: space-between;
+            /* biar sejajar */
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .story .item {
+            display: flex;
+            flex-direction: column;
+            /* gambar atas, teks bawah */
+            align-items: center;
+            /* teks sama gambarnya ke tengah */
+        }
+
+        .story img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #d6249f;
+            /* ala ig gradient */
+        }
+
+        .story p {
+            margin-top: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
-        <a href=""><h1>Instagram</h1></a>
-        <a href=""><h1>❤️</h1></a>
-     
-        
-   
+        <a href="">
+            <h1>Instagram</h1>
+        </a>
+        <a href="">
+            <h1>❤️</h1>
+        </a>
+
+
+
     </div>
     <div class="story">
-        <img src="img/image.png" alt="">
-        <h4>Your story</h4>
+        <div class="item">
+            <img src="img/image.png" alt="">
+            <p>User1</p>
+        </div>
+        <div class="item">
+            <img src="img/img2.png" alt="">
+            <p>User2</p>
+        </div>
+        <div class="item">
+            <img src="img/img3.png" alt="">
+            <p>User3</p>
+        </div>
     </div>
+
 </body>
+
 </html>
