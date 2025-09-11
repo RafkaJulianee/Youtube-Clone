@@ -1,167 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front End Develover</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Clone</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: "Montserrat";
-
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #181818;
+            color: #fff;
         }
-
-        h1 {
-            text-align: center;
-            margin-top: 80px;
-            border-left: 6px ridge red;
-            padding: 10;
+        header {
+            display: flex;
+            align-items: center;
+            padding: 16px 32px;
+            background: #202020;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-
-        p {
-            text-align: center;
-            border-style: ridge;
-            border-color: bisque;
-            border-radius: 30px;
-            border-width: 1px;
-            padding: 50px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff0000;
+            margin-right: 32px;
+            letter-spacing: 2px;
         }
-
-
-
-
-
-        a {
-            text-decoration: none;
-            padding: 40px;
-
-            text-align: center;
-            color: white;
-
-
-
+        .search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
-
-
-        .nav {
-            padding: 50px 10px 10px 10px;
-            /* atas, kanan, bawah, kiri */
-            background-color: aqua;
-            background-image: url('image.png');
-            background-size: cover;
-            background-position: center;
-            height: 200px;
-            position: relative;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 20px;
+        .search-bar input {
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 2px 0 0 2px;
+            font-size: 1rem;
+            background: #121212;
+            color: #fff;
+            outline: none;
         }
-
-      .card {
-  display: flex;              /* bikin sejajar */
-  justify-content: center;    /* rata tengah */
-  gap: 30px;                  /* jarak antar card */
-  margin-top: 20px;
-}
-
-.card1 {
-  text-align: center;         /* biar h3 di tengah */
-}
-
-.card1 h3 {
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-/* gambar utama */
-.img-box {
-  position: relative;
-  display: inline-block;
-}
-
-.img-box img {
-  display: block;
-  width: 250px;        /* atur ukuran sesuai kebutuhan */
-  border-radius: 15px;
-}
-
-/* overlay efek hover */
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  opacity: 0;
-  transition: 0.4s;
-  border-radius: 15px;
-  padding: 15px;
-  font-size: 14px;
-}
-
-.img-box:hover .overlay {
-  opacity: 1;
-}
-
+        .search-bar button {
+            padding: 10px 20px;
+            border: none;
+            background: #ff0000;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-bar button:hover {
+            background: #e60000;
+        }
+        main {
+            padding: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        .video-card {
+            background: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .video-card:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            background: #111;
+        }
+        .video-info {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .video-channel {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-bottom: 4px;
+        }
+        .video-meta {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        @media (max-width: 700px) {
+            main {
+                padding: 16px;
+            }
+            .videos {
+                gap: 16px;
+            }
+        }
     </style>
 </head>
-
 <body>
-    <div class="nav">
-        <a href="">Home</a>
-        <a href="#card">About</a>
-        <a href="">Contact</a>
+    <header>
+        <div class="logo">YouTube Clone</div>
+        <form class="search-bar" id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search videos..." autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+    <main>
+        <div class="videos" id="videosContainer"></div>
+    </main>
+    <script>
+        // Replace with your own YouTube Data API v3 key
+        const API_KEY = 'YOUR_YOUTUBE_API_KEY';
+        const videosContainer = document.getElementById('videosContainer');
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
 
-    </div>
-    <h1>Hello World</h1>
-    <p>This is a website of ziliel tech
-        ch
-        Ziliel adalah perusahaan yang berfokus pada inovasi dan kualitas. Kami hadir untuk memberikan solusi terbaik
-        dengan menggabungkan kreativitas, teknologi, dan profesionalisme, demi menciptakan nilai yang bermanfaat bagi
-        masyarakat dan mitra bisnis.
+        function renderVideos(videos) {
+            videosContainer.innerHTML = '';
+            videos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+                        <img class="video-thumb" src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.title}">
+                    </a>
+                    <div class="video-info">
+                        <div class="video-title" title="${video.snippet.title}">${video.snippet.title}</div>
+                        <div class="video-channel">${video.snippet.channelTitle}</div>
+                        <div class="video-meta">${new Date(video.snippet.publishedAt).toLocaleDateString()}</div>
+                    </div>
+                `;
+                videosContainer.appendChild(card);
+            });
+        }
 
-    </p>
+        async function searchVideos(query) {
+            videosContainer.innerHTML = '<div style="color:#fff;">Loading...</div>';
+            try {
+                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=12&q=${encodeURIComponent(query)}&key=${API_KEY}`);
+                const data = await res.json();
+                if (data.items) {
+                    renderVideos(data.items);
+                } else {
+                    videosContainer.innerHTML = '<div style="color:#fff;">No videos found.</div>';
+                }
+            } catch (err) {
+                videosContainer.innerHTML = '<div style="color:#fff;">Error loading videos.</div>';
+            }
+        }
 
-    <div class="luucy">
-        <a href="">Marco</a>
-        <a href="">Lampard</a>
-    </div>
-    <div class="card">
-        <h1>ABOUT</h1>
-        <div class="card1">
-            <div class="img-box">
-                <img src="img.png" alt="">
+        searchForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                searchVideos(query);
+            }
+        });
 
-
-                <div class="overlay">
-                    <p>Saya seorang Designer Graphic, fokus di UI/UX, Web Design, dan Branding ✨</p>
-                </div>
-            </div>
-            <h3>Designer grapich</h3>
-        </div>
-        <div class="card1">
-            <div class="img-box">
-                <img src="img2.png" alt="">
-
-                <div class="overlay">
-                    <p>Saya seorang Designer Graphic, fokus di UI/UX, Web Design, dan Branding ✨</p>
-                </div>
-            </div>
-
+        // Initial load: trending videos (using 'music' as default)
+        searchVideos('music');
+    </script>
 </body>
-
 </html>
