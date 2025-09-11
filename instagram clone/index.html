@@ -1,211 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
-    <style>
-        body {
-            font-family: "Montserrat";
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-
-
-        }
-
-        .header a {
-            margin-right: 450px;
-            text-decoration: none;
-            color: black;
-            font-family: "Dancing Script";
-
-        }
-
-        .story {
-            display: flex;
-            justify-content: space-between;
-            /* biar sejajar */
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        .story .item {
-            display: flex;
-            flex-direction: column;
-            /* gambar atas, teks bawah */
-            align-items: center;
-            /* teks sama gambarnya ke tengah */
-        }
-
-        .story img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid #d6249f;
-            /* ala ig gradient */
-        }
-
-        .story p {
-            margin-top: 5px;
-            font-size: 14px;
-            text-align: center;
-        }
-        .post {
-  margin-top: 30px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fff;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: Arial, sans-serif;
-}
-
-/* Header */
-.post-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.post-header .profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.post-header .username {
-  font-weight: bold;
-  flex-grow: 1;
-}
-
-.post-header .options {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Image */
-.post-image img {
-  width: 100%;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Actions */
-.post-actions {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  font-size: 20px;
-}
-
-.left-actions span {
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.right-actions span {
-  cursor: pointer;
-}
-
-/* Caption */
-.post-caption {
-  padding: 0 10px;
-}
-
-.post-caption b {
-  margin-right: 5px;
-}
-
-/* Comments */
-.post-comments {
-  padding: 0 10px 10px;
-  color: gray;
-  font-size: 14px;
-}
-
-    </style>
+  <meta charset="UTF-8">
+  <title>Instagram Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Instagram-like font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #fceabb 100%);
+      margin: 0;
+      color: #262626;
+    }
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #dbdbdb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.7rem;
+      letter-spacing: 2px;
+      color: #262626;
+    }
+    .navbar .nav-icons i {
+      font-size: 1.5rem;
+      margin: 0 12px;
+      cursor: pointer;
+      color: #262626;
+    }
+    .container {
+      display: flex;
+      max-width: 1000px;
+      margin: 24px auto;
+      gap: 32px;
+    }
+    .sidebar {
+      width: 250px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      height: fit-content;
+    }
+    .sidebar .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .sidebar .profile img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .sidebar .profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar .profile-info .username {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    .sidebar .profile-info .fullname {
+      font-size: 0.95rem;
+      color: #8e8e8e;
+    }
+    .sidebar .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .sidebar .menu a {
+      text-decoration: none;
+      color: #262626;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      padding: 8px 0;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .sidebar .menu a:hover {
+      background: #f2f2f2;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .stories {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .story {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #c13584;
+      object-fit: cover;
+    }
+    .story span {
+      font-size: 0.85rem;
+      color: #262626;
+      margin-top: 2px;
+    }
+    .feed {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .post {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding-bottom: 12px;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+    }
+    .post-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .post-header .username {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .post-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      background: #eee;
+    }
+    .post-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 12px;
+    }
+    .post-actions i {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .post-likes, .post-caption {
+      padding: 0 12px;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .post-caption .username {
+      font-weight: 500;
+      margin-right: 6px;
+    }
+    /* Reels section */
+    .reels {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    .reels-title {
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    .reels-list {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+    }
+    .reel {
+      width: 180px;
+      height: 320px;
+      background: #eee;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .reel video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .reel-info {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      color: #fff;
+      background: rgba(0,0,0,0.4);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    /* Chat & Notification */
+    .chat, .notification {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    .chat-title, .notification-title {
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    .chat-list, .notification-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chat-item, .notification-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .chat-item:hover, .notification-item:hover {
+      background: #f2f2f2;
+    }
+    .chat-item img, .notification-item img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .chat-info, .notification-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-info .username, .notification-info .username {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .chat-info .message, .notification-info .message {
+      font-size: 0.95rem;
+      color: #8e8e8e;
+    }
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        gap: 0;
+      }
+      .sidebar {
+        width: 100%;
+        margin-bottom: 24px;
+      }
+    }
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 0 8px;
+      }
+      .container {
+        padding: 0 4px;
+      }
+      .main-content {
+        gap: 12px;
+      }
+      .post-img {
+        height: 220px;
+      }
+      .reel {
+        width: 120px;
+        height: 200px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="header">
-        <a href="">
-            <h1>Instagram</h1>
-        </a>
-        <a href="">
-            <h1>❤️</h1>
-        </a>
-
-
-
+  <nav class="navbar">
+    <div class="logo">Instagram</div>
+    <div class="nav-icons">
+      <i class="fa-regular fa-compass"></i>
+      <i class="fa-regular fa-heart"></i>
+      <i class="fa-regular fa-paper-plane"></i>
+      <i class="fa-regular fa-user"></i>
     </div>
-    <div class="story">
-        <div class="item">
-            <img src="img/image.png" alt="">
-            <p>User1</p>
+  </nav>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="profile">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile">
+        <div class="profile-info">
+          <span class="username">john_doe</span>
+          <span class="fullname">John Doe</span>
         </div>
-        <div class="item">
-            <img src="img/image.png" alt="">
-            <p>User2</p>
+      </div>
+      <div class="menu">
+        <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#"><i class="fa-solid fa-film"></i> Reels</a>
+        <a href="#"><i class="fa-solid fa-comment-dots"></i> Chat</a>
+        <a href="#"><i class="fa-solid fa-bell"></i> Notifications</a>
+        <a href="#"><i class="fa-solid fa-user"></i> Account</a>
+      </div>
+    </aside>
+    <main class="main-content">
+      <!-- Stories -->
+      <section class="stories">
+        <div class="story">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Story">
+          <span>alice</span>
         </div>
-        <div class="item">
-            <img src="img/image.png" alt="">
-            <p>User3</p>
+        <div class="story">
+          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Story">
+          <span>bob</span>
         </div>
-    </div>
-    <!-- Post Section -->
-<div class="post">
-  <!-- Header Post -->
-  <div class="post-header">
-    <img src="img/image.png" alt="" class="profile-pic">
-    <p class="username">user1</p>
-    <span class="options">...</span>
+        <div class="story">
+          <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="Story">
+          <span>carol</span>
+        </div>
+        <div class="story">
+          <img src="https://randomuser.me/api/portraits/men/47.jpg" alt="Story">
+          <span>dave</span>
+        </div>
+      </section>
+      <!-- Reels -->
+      <section class="reels">
+        <div class="reels-title">Reels</div>
+        <div class="reels-list">
+          <div class="reel">
+            <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls muted></video>
+            <div class="reel-info">@alice</div>
+          </div>
+          <div class="reel">
+            <video src="https://www.w3schools.com/html/movie.mp4" controls muted></video>
+            <div class="reel-info">@bob</div>
+          </div>
+          <div class="reel">
+            <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls muted></video>
+            <div class="reel-info">@carol</div>
+          </div>
+        </div>
+      </section>
+      <!-- Feed -->
+      <section class="feed">
+        <div class="post">
+          <div class="post-header">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+            <span class="username">alice</span>
+          </div>
+          <img class="post-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Post">
+          <div class="post-actions">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-regular fa-comment"></i>
+            <i class="fa-regular fa-paper-plane"></i>
+            <i class="fa-regular fa-bookmark"></i>
+          </div>
+          <div class="post-likes">1,024 likes</div>
+          <div class="post-caption"><span class="username">alice</span> Beautiful day at the beach!</div>
+        </div>
+        <div class="post">
+          <div class="post-header">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User">
+            <span class="username">bob</span>
+          </div>
+          <img class="post-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="Post">
+          <div class="post-actions">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-regular fa-comment"></i>
+            <i class="fa-regular fa-paper-plane"></i>
+            <i class="fa-regular fa-bookmark"></i>
+          </div>
+          <div class="post-likes">876 likes</div>
+          <div class="post-caption"><span class="username">bob</span> Hiking adventure!</div>
+        </div>
+      </section>
+      <!-- Chat -->
+      <section class="chat">
+        <div class="chat-title">Chats</div>
+        <div class="chat-list">
+          <div class="chat-item">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+            <div class="chat-info">
+              <span class="username">alice</span>
+              <span class="message">Hey! How are you?</span>
+            </div>
+          </div>
+          <div class="chat-item">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User">
+            <div class="chat-info">
+              <span class="username">bob</span>
+              <span class="message">Let's meet tomorrow!</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Notifications -->
+      <section class="notification">
+        <div class="notification-title">Notifications</div>
+        <div class="notification-list">
+          <div class="notification-item">
+            <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="User">
+            <div class="notification-info">
+              <span class="username">carol</span>
+              <span class="message">Liked your photo</span>
+            </div>
+          </div>
+          <div class="notification-item">
+            <img src="https://randomuser.me/api/portraits/men/47.jpg" alt="User">
+            <div class="notification-info">
+              <span class="username">dave</span>
+              <span class="message">Started following you</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-
-  <!-- Image Post -->
-  <div class="post-image">
-    <img src="img/image.png" alt="post">
-  </div>
-
-  <!-- Actions -->
-  <div class="post-actions">
-    <div class="left-actions">
-      <span>❤️</span>
-      <span>💬</span>
-      <span>📤</span>
-    </div>
-    <div class="right-actions">
-      <span>🔖</span>
-    </div>
-  </div>
-
-  <!-- Caption -->
-  <div class="post-caption">
-    <p><b>user1</b> Lagi belajar bikin clone IG 🚀</p>
-  </div>
-
-  <!-- Comments -->
-  <div class="post-comments">
-    <p id="komen">View all 12 comments</p>
-  </div>
-</div>
-<script>
-  
-    
-</script>
 </body>
-
 </html>
