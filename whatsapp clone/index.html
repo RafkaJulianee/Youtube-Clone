@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WhatsApp Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary: #075e54;
+            --secondary: #25d366;
+            --background: #ece5dd;
+            --chat-bg: #fff;
+            --chat-border: #ddd;
+            --my-msg: #dcf8c6;
+            --other-msg: #fff;
+            --avatar-size: 40px;
+            --sidebar-width: 300px;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--background);
+            color: #222;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+        }
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--chat-border);
+        }
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .avatar {
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+            border-radius: 50%;
+            background: #fff;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .sidebar-search {
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar-search input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .chat-item:hover, .chat-item.active {
+            background: rgba(255,255,255,0.08);
+        }
+        .chat-info {
+            flex: 1;
+            margin-left: 12px;
+        }
+        .chat-name {
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .chat-last {
+            font-size: 13px;
+            color: #e0e0e0;
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--chat-bg);
+        }
+        .main-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--chat-border);
+            background: var(--chat-bg);
+        }
+        .main-header .avatar {
+            margin-right: 15px;
+        }
+        .main-header .chat-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #222;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 25px 20px;
+            overflow-y: auto;
+            background: var(--background);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .message {
+            max-width: 60%;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            position: relative;
+            word-break: break-word;
+            margin-bottom: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        }
+        .message.me {
+            align-self: flex-end;
+            background: var(--my-msg);
+        }
+        .message.other {
+            align-self: flex-start;
+            background: var(--other-msg);
+        }
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+            text-align: right;
+        }
+        .chat-input {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-top: 1px solid var(--chat-border);
+            background: var(--chat-bg);
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--chat-border);
+            font-size: 15px;
+            outline: none;
+            margin-right: 10px;
+        }
+        .chat-input button {
+            background: var(--secondary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .chat-input button:hover {
+            background: #20b358;
+        }
+        @media (max-width: 700px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar-header, .sidebar-search, .chat-info, .chat-last {
+                display: none;
+            }
+            .chat-item {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="avatar" alt="User">
+                <span style="font-weight:600;">John Doe</span>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" placeholder="Search or start new chat">
+            </div>
+            <div class="chat-list">
+                <div class="chat-item active" onclick="selectChat(0)">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar" alt="User">
+                    <div class="chat-info">
+                        <div class="chat-name">Alice</div>
+                        <div class="chat-last">Hey! How are you?</div>
+                    </div>
+                </div>
+                <div class="chat-item" onclick="selectChat(1)">
+                    <img src="https://randomuser.me/api/portraits/men/56.jpg" class="avatar" alt="User">
+                    <div class="chat-info">
+                        <div class="chat-name">Bob</div>
+                        <div class="chat-last">Let's meet tomorrow.</div>
+                    </div>
+                </div>
+                <div class="chat-item" onclick="selectChat(2)">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="avatar" alt="User">
+                    <div class="chat-info">
+                        <div class="chat-name">Clara</div>
+                        <div class="chat-last">Sent the files!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-header">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar" id="chatAvatar" alt="User">
+                <span class="chat-name" id="chatName">Alice</span>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <!-- Messages will appear here -->
+            </div>
+            <form class="chat-input" onsubmit="sendMessage(event)">
+                <input type="text" id="messageInput" placeholder="Type a message" autocomplete="off">
+                <button type="submit">&#9658;</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const chats = [
+            {
+                name: "Alice",
+                avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+                messages: [
+                    { text: "Hey! How are you?", time: "09:30", sender: "other" },
+                    { text: "I'm good, thanks! You?", time: "09:31", sender: "me" },
+                    { text: "Doing great!", time: "09:32", sender: "other" }
+                ]
+            },
+            {
+                name: "Bob",
+                avatar: "https://randomuser.me/api/portraits/men/56.jpg",
+                messages: [
+                    { text: "Let's meet tomorrow.", time: "10:00", sender: "other" },
+                    { text: "Sure, what time?", time: "10:01", sender: "me" }
+                ]
+            },
+            {
+                name: "Clara",
+                avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+                messages: [
+                    { text: "Sent the files!", time: "11:15", sender: "other" },
+                    { text: "Received, thanks!", time: "11:16", sender: "me" }
+                ]
+            }
+        ];
+        let currentChat = 0;
+
+        function renderMessages() {
+            const chat = chats[currentChat];
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = '';
+            chat.messages.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = `message ${msg.sender}`;
+                div.innerHTML = `${msg.text}<div class="message-time">${msg.time}</div>`;
+                chatBody.appendChild(div);
+            });
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function selectChat(idx) {
+            currentChat = idx;
+            document.querySelectorAll('.chat-item').forEach((el, i) => {
+                el.classList.toggle('active', i === idx);
+            });
+            document.getElementById('chatAvatar').src = chats[idx].avatar;
+            document.getElementById('chatName').textContent = chats[idx].name;
+            renderMessages();
+        }
+
+        function sendMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' +
+                                     now.getMinutes().toString().padStart(2, '0');
+            chats[currentChat].messages.push({ text, time, sender: "me" });
+            renderMessages();
+            input.value = '';
+        }
+
+        // Initial render
+        renderMessages();
+    </script>
+</body>
+</html></form></div>
